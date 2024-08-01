@@ -3,6 +3,8 @@ import {Row , Col} from 'react-bootstrap'
 // import products from "../products"
 import Product from "../components/Product"
 import { useGetProductsQuery } from '../slices/productsApiSlice'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 // import axios from "axios"
 
 const Home = () => {
@@ -22,11 +24,11 @@ const Home = () => {
       {/* {isLoading && <h2>Loading...</h2>}
       {isError && <h2>Error</h2>} */}
       {isLoading ? (
-        <h2>Loading...</h2>
+         <Loader />
       ) : error ? (
-        <div>
+        <Message variant="danger">
           {error?.data?.message || error?.error}
-        </div>
+        </Message>
       ) : (
         <>
           <h1>Latest Products</h1>

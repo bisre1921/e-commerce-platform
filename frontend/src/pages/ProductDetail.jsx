@@ -6,6 +6,8 @@ import Rating from '../components/Rating'
 import "../custom-css/product-detail.css"
 import axios from 'axios'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 const ProductDetail = () => {
     // const [product, setProduct] = useState([])
@@ -32,11 +34,11 @@ const ProductDetail = () => {
             </Link>
 
             {isLoading ? (
-                <h2>Loading...</h2>
+                <Loader />
             ) : error ? (
-                <div>
+                <Message variant="danger">
                     {error?.data?.message || error?.error}
-                </div>
+              </Message>
             ) : (
                 <>
                     <Row>
