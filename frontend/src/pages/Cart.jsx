@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import { FaTrash, FaShoppingCart } from 'react-icons/fa';
 import Message from '../components/Message';
-import { addToCart } from '../slices/cartSlice';
+import { addToCart, removeFromCart } from '../slices/cartSlice';
 import "../custom-css/cart.css"
 
 const Cart = () => {
@@ -16,6 +16,14 @@ const Cart = () => {
     const addToCartHandler = async (product, qty) => {
         dispatch(addToCart({ ...product, qty }));
     };
+
+    const removeFromCartHandler = (id) => {
+        dispatch(removeFromCart(id));
+    }
+
+    const checkOutHandler = () => {
+        navigate('/login?redirect=shipping');
+    }
 
     return (
         <Row className="cart-page">
@@ -56,7 +64,12 @@ const Cart = () => {
                                         </Form.Control>
                                     </Col>
                                     <Col md={2}>
-                                        <Button type="button" variant="danger" className="remove-btn">
+                                        <Button 
+                                            type="button" 
+                                            variant="danger"
+                                            className="remove-btn"
+                                            onClick={() => removeFromCartHandler(cartItem._id)}
+                                        >
                                             <FaTrash />
                                         </Button>
                                     </Col>
@@ -80,7 +93,7 @@ const Cart = () => {
                                 type="button"
                                 className="btn-block proceed-btn"
                                 disabled={cartItems.length === 0}
-                                onClick={() => navigate('/checkout')}
+                                onClick={checkOutHandler}
                             >
                                 Proceed To Checkout
                             </Button>
