@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import ProductRoutes from "./routes/ProductRoutes.js";
+import UserRoutes from "./routes/UserRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleWare.js";
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products" , ProductRoutes)
+app.use("/api/users" , UserRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
